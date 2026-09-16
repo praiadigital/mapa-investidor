@@ -1,39 +1,77 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mapa do Investidor — Score de investimento por cidade do litoral | Praia Digital</title>
-<meta name="description" content="Compare o potencial de investimento imobiliário das cidades do litoral paulista com score interativo de 0 a 100.">
-<link rel="canonical" href="https://praia.digital/mapa-investidor/">
-<style>:root{--azul:#0a2540;--mar:#0e7490;--areia:#f8f5ef}*{margin:0;box-sizing:border-box;font-family:system-ui,sans-serif}body{background:var(--areia);color:#1e293b}header{background:linear-gradient(135deg,var(--azul),var(--mar));color:#fff;padding:2.5rem 1.5rem;text-align:center}.badge{display:inline-block;background:rgba(255,255,255,.15);padding:.25rem .8rem;border-radius:999px;font-size:.8rem;margin-bottom:.8rem}main{max-width:860px;margin:2rem auto;padding:0 1.25rem}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}.city{background:#fff;border-radius:1rem;padding:1.25rem;box-shadow:0 4px 20px rgba(10,37,64,.07);border-top:5px solid var(--mar);cursor:pointer;transition:transform .15s}.city:hover{transform:translateY(-4px)}.city h3{display:flex;justify-content:space-between;align-items:center}.pts{font-size:1.4rem;font-weight:800}.barra{height:8px;background:#e2e8f0;border-radius:999px;overflow:hidden;margin:.6rem 0}.barra div{height:100%}.city p{font-size:.85rem;color:#475569}.city ul{margin:.5rem 0 0 1rem;font-size:.83rem;color:#475569}.rede{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-top:.5rem}.rede a{background:#fff;border:1px solid #e2e8f0;border-radius:.6rem;padding:.8rem;text-decoration:none;color:var(--azul);font-weight:600;font-size:.9rem}footer{text-align:center;padding:2rem;color:#64748b;font-size:.85rem}footer a{color:var(--mar)}.hint{text-align:center;color:#64748b;margin-bottom:1rem}</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa do Investidor do Litoral | Praia Digital</title>
+<meta name="description" content="Score interativo de potencial de investimento por cidade do litoral paulista: preço, valorização, liquidez e renda de temporada. Satélite de praia.digital.">
+<style>
+body{font-family:system-ui,-apple-system,sans-serif;margin:0;background:#f8fafc;color:#0f172a;line-height:1.6}
+.hero{background:linear-gradient(135deg,#14532d,#16a34a);color:#fff;padding:50px 20px;text-align:center}
+.container{max-width:1000px;margin:0 auto;padding:30px 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.cta{display:inline-block;background:#fff;color:#0c4a6e;padding:10px 22px;border-radius:8px;text-decoration:none;font-weight:700;margin:6px}
+button{background:#0284c7;color:#fff;border:none;padding:10px 18px;border-radius:8px;font-weight:700;cursor:pointer}
+input,select,textarea{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;margin:6px 0;font-family:inherit}
+footer{text-align:center;padding:24px;color:#64748b;font-size:.9em}
+.bar{height:14px;border-radius:7px;background:linear-gradient(90deg,#0ea5e9,#0369a1)}
+</style>
 </head>
 <body>
-<header><span class="badge">🛰️ App satélite de <a href="https://praia.digital" style="color:#fff">praia.digital</a></span><h1>🗺️ Mapa do Investidor</h1><p>Score de potencial de investimento — litoral paulista, cidade por cidade</p></header>
-<main>
-<p class="hint">Critérios: liquidez, valorização histórica, yield de temporada e preço de entrada. Toque em uma cidade para detalhes.</p>
-<div class="grid" id="grid"></div>
-<h2 style="margin:1.5rem 0 .8rem">🌐 Rede Praia Digital</h2>
-<div class="rede">
-<a href="https://praia.digital">🏠 Portal Praia Digital</a>
-<a href="https://praia.digital/praiascore">🏆 PraiaScore</a>
-<a href="https://praia.digital/radar-precos">📊 Radar de Preços</a>
-<a href="https://praia.digital/bairro-score">🏘️ Bairro Score</a>
-<a href="https://praia.digital/investidores">💼 Portal do Investidor</a>
-<a href="https://praia.digital/apps">🛰️ Todos os apps</a>
+<nav style="background:#0c4a6e;padding:12px 20px;display:flex;gap:14px;flex-wrap:wrap;font-family:system-ui,sans-serif">
+<a style="color:#e0f2fe;text-decoration:none;font-weight:600" href="https://praia.digital/">🌊 Praia Digital</a>
+<a style="color:#e0f2fe;text-decoration:none;font-weight:600" href="https://praiadigital.github.io/apps/">Hub</a>
+<a style="color:#e0f2fe;text-decoration:none;font-weight:600" href="https://praiadigital.github.io/hermes-agents/">Hermes Agents</a>
+<a style="color:#e0f2fe;text-decoration:none;font-weight:600" href="https://praiadigital.github.io/area-anfitriao/">Anfitrião</a>
+<a style="color:#e0f2fe;text-decoration:none;font-weight:600" href="https://praiadigital.github.io/simulador-roi/">ROI</a>
+<a style="color:#e0f2fe;text-decoration:none;font-weight:600" href="https://praiadigital.github.io/simulador-credito/">Crédito</a>
+<a style="color:#e0f2fe;text-decoration:none;font-weight:600" href="https://praiadigital.github.io/guia-litoral/">Guia</a>
+<a style="color:#e0f2fe;text-decoration:none;font-weight:600" href="https://praiadigital.github.io/blog-litoral/">Blog</a>
+<a style="color:#e0f2fe;text-decoration:none;font-weight:600" href="https://praiadigital.github.io/calculadoras/">Calculadoras</a>
+<a style="color:#e0f2fe;text-decoration:none;font-weight:600" href="https://praiadigital.github.io/newsletter-litoral/">Newsletter</a>
+<a style="color:#e0f2fe;text-decoration:none;font-weight:600" href="https://praiadigital.github.io/eventos-litoral/">Eventos</a>
+<a style="color:#e0f2fe;text-decoration:none;font-weight:600" href="https://praiadigital.github.io/radar-precos/">Radar</a>
+<a style="color:#e0f2fe;text-decoration:none;font-weight:600" href="https://praiadigital.github.io/concierge-ia/">Concierge IA</a>
+<a style="color:#e0f2fe;text-decoration:none;font-weight:600" href="https://praiadigital.github.io/mapa-investidor/">Mapa</a>
+<a style="color:#e0f2fe;text-decoration:none;font-weight:600" href="https://praiadigital.github.io/checklist-anfitriao/">Checklist</a>
+</nav>
+<div class="hero"><h1>🗺️ Mapa do Investidor</h1><p>Descubra onde investir no litoral paulista — score composto de preço, valorização, liquidez e renda de temporada.</p>
+<a class="cta" href="https://praiadigital.github.io/radar-precos/">📡 Ver Radar de Preços</a></div>
+<div class="container">
+<div class="card"><label><strong>Seu perfil:</strong></label>
+<select id="perfil" onchange="render()">
+<option value="equilibrio">Equilibrado</option>
+<option value="renda">Renda de temporada</option>
+<option value="valorizacao">Valorização</option>
+<option value="entrada">Menor preço de entrada</option>
+</select></div>
+<div id="lista"></div>
+<div class="card"><h3>📊 Calcule antes de decidir</h3><p>Use as <a href="https://praiadigital.github.io/calculadoras/">Calculadoras</a> e o <a href="https://praiadigital.github.io/simulador-roi/">Simulador ROI</a> com os dados da cidade escolhida. Veja também os <a href="https://praiadigital.github.io/eventos-litoral/">Eventos</a> que impulsionam a temporada em cada região.</p></div>
 </div>
-</main>
-<footer>Feito com 🌊 pela rede <a href="https://praia.digital">Praia Digital</a> · <a href="https://github.com/praiadigital/mapa-investidor">código aberto no GitHub</a></footer>
 <script>
-const dados=[
-{n:'Guarujá',s:88,m2:9500,y:'6,8%',d:['Alta liquidez o ano todo','Fortíssima demanda de temporada','Valorização média de 9% a.a.']},
-{n:'Riviera de São Lourenço',s:85,m2:14000,y:'5,9%',d:['Perfil premium e condomínios','Ticket alto, baixa vacância','Valorização média de 11% a.a.']},
-{n:'Santos',s:82,m2:10500,y:'5,5%',d:['Mercado residencial + temporada','Metrô e porto impulsionam','Valorização média de 7% a.a.']},
-{n:'São Sebastião',s:78,m2:8200,y:'7,4%',d:['Maresias e Juquehy em alta','Sazonalidade concentrada no verão','Valorização média de 10% a.a.']},
-{n:'Ubatuba',s:71,m2:6500,y:'7,1%',d:['Preço de entrada baixo','Turismo ecológico crescente','Valorização média de 8% a.a.']},
-{n:'Caraguatatuba',s:66,m2:5200,y:'6,6%',d:['Custo baixo, demanda estável','Boa para primeiro investimento','Valorização média de 6% a.a.']},
-{n:'Mongaguá',s:58,m2:3800,y:'6,2%',d:['Entrada mais barata do litoral','Demanda concentrada no verão','Valorização média de 5% a.a.']},
-{n:'Itanhaém',s:54,m2:3500,y:'5,8%',d:['Alto potencial de longo prazo','Liquidez ainda limitada','Valorização média de 4% a.a.']}];
-const cor=s=>s>=80?'#16a34a':s>=65?'#0e7490':'#f59e0b';
-document.getElementById('grid').innerHTML=dados.sort((a,b)=>b.s-a.s).map(c=>`<div class="city" onclick="this.querySelector('ul').style.display=this.querySelector('ul').style.display==='none'?'block':'none'"><h3>${c.n}<span class="pts" style="color:${cor(c.s)}">${c.s}</span></h3><div class="barra"><div style="width:${c.s}%;background:${cor(c.s)}"></div></div><p>Preço médio: <b>R$ ${c.m2.toLocaleString('pt-BR')}/m²</b> · Yield temporada: <b>${c.y}</b></p><ul style="display:none">${c.d.map(x=>`<li>${x}</li>`).join('')}</ul></div>`).join('');
+const cidades=[
+{nome:"Guarujá",preco:12500,valor:8,liquidez:9,renda:8},
+{nome:"Santos",preco:11800,valor:7,liquidez:9,renda:7},
+{nome:"Bertioga",preco:9200,valor:10,liquidez:7,renda:9},
+{nome:"Praia Grande",preco:7400,valor:8,liquidez:8,renda:8},
+{nome:"Mongaguá",preco:5200,valor:5,liquidez:5,renda:6},
+{nome:"Itanhaém",preco:5600,valor:6,liquidez:5,renda:6},
+{nome:"Peruíbe",preco:4900,valor:9,liquidez:4,renda:6},
+{nome:"São Vicente",preco:6800,valor:5,liquidez:6,renda:5}];
+function score(c,p){
+const precoInv=(13000-c.preco)/8000*10;
+if(p==='renda')return c.renda*0.6+c.liquidez*0.2+precoInv*0.2;
+if(p==='valorizacao')return c.valor*0.7+precoInv*0.3;
+if(p==='entrada')return precoInv*0.7+c.valor*0.3;
+return (c.valor+c.renda+c.liquidez+precoInv)/4;}
+function render(){
+const p=document.getElementById('perfil').value;
+const d=cidades.map(c=>({...c,s:score(c,p)})).sort((a,b)=>b.s-a.s);
+document.getElementById('lista').innerHTML=d.map((c,i)=>`<div class="card" style="display:flex;align-items:center;gap:16px;flex-wrap:wrap"><div style="font-size:2em;font-weight:800;color:#16a34a">#${i+1}</div><div style="flex:1;min-width:200px"><h3 style="margin:0">🏙️ ${c.nome}</h3><p style="margin:4px 0;color:#475569">R$ ${c.preco.toLocaleString('pt-BR')}/m² · Valorização ${c.valor}/10 · Liquidez ${c.liquidez}/10 · Renda ${c.renda}/10</p><div class="bar" style="width:${Math.round(c.s*10)}%"></div></div><div style="font-size:1.6em;font-weight:800">${c.s.toFixed(1)}</div></div>`).join('');
+}
+render();
 </script>
-</body></html>
+<footer>© Praia Digital — 2026 — Satélite da rede <a href="https://praia.digital">praia.digital</a> · <a href="https://praiadigital.github.io/apps/">Ver todos os apps</a></footer>
+</body>
+</html>
